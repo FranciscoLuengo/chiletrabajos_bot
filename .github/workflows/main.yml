@@ -28,9 +28,12 @@ jobs:
           python trabajos_bot.py
 
       - name: Guardar archivo JSON con los trabajos ya enviados
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}
           git add vistos.json
-          git commit -m "Actualiza trabajos enviados [bot]"
+          git diff --cached --quiet || git commit -m "Actualiza trabajos enviados [bot]"
           git push origin main
