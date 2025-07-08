@@ -42,7 +42,7 @@ def scrapear():
 
     for trabajo in trabajos:
         titulo_tag = trabajo.select_one("h2.title a")
-        descripcion_tag = trabajo.select_one("p.description")
+        # descripcion_tag = trabajo.select_one("p.description")
         fecha_tag = trabajo.select("h3.meta")
 
         if not titulo_tag:
@@ -50,8 +50,8 @@ def scrapear():
 
         titulo = titulo_tag.text.strip()
         url = titulo_tag["href"]
-        descripcion = descripcion_tag.text.strip().replace(
-            "\n", " ") if descripcion_tag else "Sin descripción"
+        # descripcion = descripcion_tag.text.strip().replace(
+        #     "\n", " ") if descripcion_tag else "Sin descripción"
         fecha = fecha_tag[1].text.strip() if len(
             fecha_tag) > 1 else "Fecha no disponible"
 
@@ -59,7 +59,7 @@ def scrapear():
             mensaje = (
                 f"💼 **{titulo}**\n"
                 f"📅 Publicado: {fecha}\n"
-                f"📝 {descripcion}\n"
+                # f"📝 {descripcion}\n"
                 f"🔗 [Ver oferta]({url})"
             )
             enviar_discord(mensaje)
