@@ -25,7 +25,11 @@ def guardar_vistos(lista):
 
 
 def enviar_discord(mensaje):
-    response = requests.post(DISCORD_WEBHOOK_URL, json={"content": mensaje})
+    data = {
+        "content": mensaje,
+        "thread_name": "Ofertas Informática"
+    }
+    response = requests.post(DISCORD_WEBHOOK_URL, json=data)
     if response.status_code != 204:
         print("Error al enviar mensaje a Discord:", response.text)
 
