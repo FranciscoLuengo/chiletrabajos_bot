@@ -26,3 +26,11 @@ jobs:
       - name: Ejecutar script
         run: |
           python trabajos_bot.py
+
+      - name: Guardar archivo JSON con los trabajos ya enviados
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add vistos.json
+          git commit -m "Actualiza trabajos enviados [bot]"
+          git push origin main
